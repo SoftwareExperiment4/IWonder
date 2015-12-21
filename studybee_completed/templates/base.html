@@ -1,6 +1,6 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns="http://www.w3.org/1999/html">
 
 <head>
 
@@ -11,14 +11,14 @@
     <meta name="author" content="studybee">
 
     <title>
-        qna blog - {% block title %}{% endblock %}
+        IWonder - {% block title %}{% endblock %}
     </title>
 
     <!-- Clean Blog - Bootstrap Core CSS -->
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
     <!-- Clean Blog - Custom CSS -->
-    <link href="{% static 'css/clean-blog.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/clean.min.css' %}" rel="stylesheet">
 
     <!-- Clean Blog - Custom Fonts -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -49,19 +49,19 @@
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand">IWonder</a>
+                <a href="{% url 'home' %}" class="navbar-brand">IWonder</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
+                    <li class="active">
                         <a href="{% url 'home' %}">Home</a>
                     </li>
                     <li>
@@ -70,6 +70,7 @@
                     <li>
                         <a href="{% url 'post' %}">Question</a>
                     </li>
+                    <li role="separator" class="divider"></li>
                     <li>
                         {% if request.user.is_authenticated %}
                         <a href="{% url 'logout_url' %}">{{ request.user.username }}, Log Out</a>
@@ -134,7 +135,7 @@
                         </li>
                         <li>
                             {# facebook #}
-                            <a href="https://www.facebook.com/groups/studybee/">
+                            <a href="https://www.facebook.com/IWonder-1213588791988273">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -143,7 +144,7 @@
                         </li>
                         <li>
                             {# github #}
-                            <a href="#">
+                            <a href="https://github.com/SoftwareExperiment4/IWonder">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -151,10 +152,13 @@
                             </a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted">Copyright &copy; studybee 2015</p>
+
+                    <p class="copyright text-muted">Copyright &copy; IWonder 2015 </p>
+                    <!--p class="copyright text-muted">powered by studybee</p-->
                 </div>
             </div>
         </div>
+        <br/>
     </footer>
 
     <!-- Bootstrap Core JavaScript -->

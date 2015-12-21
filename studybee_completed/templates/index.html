@@ -1,19 +1,23 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-{% block title %}qna blog{% endblock %}
-{% block head %}qna blog{% endblock %}
-{% block subhead %}All About Question and Answer{% endblock %}
+{% block title %}home{% endblock %}
+{% block head %}IWonder{% endblock %}
+{% block subhead %}Ask whatever you want{% endblock %}
 {% block img-bg %}{% static 'img/home-bg.jpg' %}{% endblock %}
 
 {% block content %}
-
+    <blockquote>IWonder, The Easiest & Clearest & Open Questionaire Ever.</blockquote>
+    <br/>
+    <h1>Recent Questions</h1>
+    <br/>
     {% for question in questions %}
         <div class="post-preview">
             <a href="#">
-                <h2 class="post-title">
+                <h3 class="post-title">
                     <a href="{% url 'view_question' question.id %}">{{ question.title }}</a>
-                </h2>
+                </h3>
             </a>
+
             <p class="post-meta">
                 {% if question.tags.count %}
                     <span class="glyphicon glyphicon-tag" aria-hidden="true" style="font-size: 0.7em;"></span>

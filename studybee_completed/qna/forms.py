@@ -11,6 +11,40 @@ class SignupForm(UserCreationForm):
         kwargs.setdefault('label_suffix', '')
         super(SignupForm, self).__init__(*args, **kwargs)
 
+        NOT_SET = 'NOT'
+        MALE = 'MAL'
+        FEMALE = 'FEM'
+        THIRD = 'THD'
+        GENDER_CHOICES = (
+            (NOT_SET, 'Not Set'),
+            (MALE, 'Male'),
+            (FEMALE, 'Female'),
+            (THIRD, 'The 3rd'),
+        )
+        self.fields['gender'].choices = GENDER_CHOICES
+
+        TEENS = 'TNS'
+        TWENTIES = 'TWT'
+        THIRTIES = 'THT'
+        AGE_CHOICES = (
+            (NOT_SET, 'Not Set'),
+            (TEENS, 'Teens'),
+            (TWENTIES, 'Twenties'),
+            (THIRTIES, 'Thirties'),
+        )
+        self.fields['age'].choices = AGE_CHOICES
+
+        IN_REST = 'INR'
+        STUDENT = 'STD'
+        OFFICER = 'OFC'
+        OCCUPATION_CHOICES = (
+            (NOT_SET, 'Not Set'),
+            (IN_REST, 'in Rest'),
+            (STUDENT, 'Student'),
+            (OFFICER, 'Office Worker'),
+        )
+        self.fields['occupation'].choices = OCCUPATION_CHOICES
+
     username = forms.RegexField(
         max_length=30,
         regex=r'^[\w.@+-]+$',
@@ -36,6 +70,7 @@ class SignupForm(UserCreationForm):
             }
         )
     )
+
     password1 = forms.CharField(
         label='Password',
         widget=forms.PasswordInput(
@@ -58,14 +93,31 @@ class SignupForm(UserCreationForm):
         help_text="Enter the same password as above, for verification."
     )
 
+    gender = forms.ChoiceField(
+        label='Gender',
+    )
+
+    age = forms.ChoiceField(
+        label='Age',
+    )
+
+    occupation = forms.ChoiceField(
+        label='Occupation',
+    )
+
     class Meta:
         model = User
-        fields = ("username", "email", "password1", "password2",)
+        fields = ("username", "email", "password1", "password2",
+                  "gender", "age", "occupation",)
 
     def save(self, commit=True):
         _user = super(UserCreationForm, self).save(commit=False)
         _user.email = self.cleaned_data['email']
         _user.set_password(self.cleaned_data['password1'])
+        _user.gender = self.cleaned_data['gender']
+        _user.age = self.cleaned_data['age']
+        _user.occupation = self.cleaned_data['occupation']
+
         if commit:
             _user.save()
         return _user
@@ -129,7 +181,7 @@ class PostForm(forms.ModelForm):
     )
     tags = forms.CharField(
         label='Tag',
-        required=False,
+        required=True,
         max_length=200,
         help_text=u"Tags are separated by comma(,).",
         widget=forms.TextInput(
@@ -151,7 +203,7 @@ class CommentForm(forms.ModelForm):
 
     content = forms.CharField(
         label='Comment',
-        required=False,
+        required=True,
         max_length=500,
         widget=forms.Textarea(
             attrs={

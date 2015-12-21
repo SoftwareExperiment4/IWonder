@@ -11,6 +11,9 @@
 <form id="signup" class="form-horizontal" method="post" action="{% url 'signup' %}">
     {% csrf_token %}
 
+    <h4>✦ Essential Infomation</h4>
+    <p>You should fill these field to signup.</p>
+
     <!-- Username input-->
     <div class="row control-group">
         <div class="form-group col-xs-12 floating-label-form-group controls">
@@ -54,6 +57,47 @@
             </span>
         </div>
     </div>
+    <br/>
+
+    <h4>✦ Optional Infomation</h4>
+    <p>You can let these keep "Not Set".<br/>If you do, you can't create customize questionaire about that field.</p>
+
+    <div class="row control-group">
+        <div class="form-group col-xs-12 floating-label-form-group controls">
+            {{ signupform.gender.label_tag }}
+            {{ signupform.gender }}
+            <span class="field-error">
+            {{ signupform.gender.errors|striptags }}
+            </span>
+        </div>
+
+    </div>
+
+    <div class="row control-group">
+        <div class="form-group col-xs-12 floating-label-form-group controls">
+            {{ signupform.age.label_tag }}
+            {{ signupform.age }}
+            <span class="field-error">
+            {{ signupform.age.errors|striptags }}
+            </span>
+        </div>
+    </div>
+
+    <div class="row control-group">
+        <div class="form-group col-xs-12 floating-label-form-group controls">
+            {{ signupform.occupation.label_tag }}
+            {{ signupform.occupation }}
+            <span class="field-error">
+            {{ signupform.occupation.errors|striptags }}
+            </span>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var s = $("select")
+        for(i=0;i<s.length;i++)
+            s[i].size = s[i].length;
+    </script>
 
     <br>
 
